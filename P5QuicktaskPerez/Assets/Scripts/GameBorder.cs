@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class GameBorder : MonoBehaviour
 {
-    GameObject Player;
+    public GameObject player;
+    Rigidbody2D rigidBody2D;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,7 +15,7 @@ public class GameBorder : MonoBehaviour
     {
         
     }
-    public void OnCollisionEnter(Collision collision)
+    public void OnTrggerEnter(Collision other)
     {
         Destroy(gameObject);
     }

@@ -3,29 +3,41 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rigidbody2d;
+    public float speed = 5.0f;
+    public GameObject player;
     public InputAction MoveAction;
-    public float speed = 3.0f;
+    public Vector2 moveInput;
+    public float gravityScale;
 
-    Vector2 move;
 
+
+    private Rigidbody2D rb; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rigidbody2d=GetComponent<Rigidbody2D>();
         MoveAction.Enable();
 
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        move = MoveAction.ReadValue<Vector2>();
+       
+           
+        rb.linearVelocity = moveInput * speed;
+            
+     
     }
 
-    void FixedUpdate()
+    void TurnOnGravity()
     {
-        Vector2 position = (Vector2)rigidbody2d.position + move * speed * Time.deltaTime;
-        rigidbody2d.MovePosition(position);
+        rb.gravityScale = gravityScale;
+    }
+
+    void OnMove (InputValue value)
+    {
+        
     }
 }
+
