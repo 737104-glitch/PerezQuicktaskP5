@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &154415690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154415691}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &154415691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154415690}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.11, y: -0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 268361107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &268361103
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +165,7 @@ GameObject:
   - component: {fileID: 268361108}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,10 +193,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &268361105
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -280,10 +311,11 @@ Transform:
   m_GameObject: {fileID: 268361103}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.85, y: -2.62, z: 0}
+  m_LocalPosition: {x: -13.3, y: -3.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 154415691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &268361108
@@ -298,60 +330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735d9c63db4cde84f923536b8664279e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 5
-  player: {fileID: 268361103}
-  MoveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8a347b90-7808-43ed-887e-61870a766c7a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 268eb54f-141d-44d0-b660-23f9f53eddc8
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 8d0efc86-8907-4602-8b1d-b1173bf60357
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 0d30584a-6202-4ab6-8b09-ad56924fa70c
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: a8cb6f0f-d991-4f72-a328-4556c0589c13
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: b5c81fa4-9ec3-4700-9cc1-585f1796e5a8
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    m_Flags: 0
-    m_Priority: 0
-  moveInput: {x: 0, y: 0}
-  gravityScale: 1
+  rb: {fileID: 268361104}
+  groundCheck: {fileID: 154415691}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &383190502
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +347,7 @@ GameObject:
   - component: {fileID: 383190503}
   - component: {fileID: 383190506}
   - component: {fileID: 383190505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +744,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8.48
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -804,7 +787,7 @@ GameObject:
   - component: {fileID: 597904148}
   - component: {fileID: 597904151}
   - component: {fileID: 597904150}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1311,17 +1294,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842754243}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 399912889}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 895463441}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.39, y: 0}
+  m_AnchoredPosition: {x: -13.089999, y: -5.45}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &895463438
@@ -1335,8 +1318,8 @@ GameObject:
   - component: {fileID: 895463441}
   - component: {fileID: 895463440}
   - component: {fileID: 895463439}
-  - component: {fileID: 895463442}
   - component: {fileID: 895463443}
+  - component: {fileID: 895463444}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -1458,25 +1441,13 @@ Transform:
   m_GameObject: {fileID: 895463438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.48, y: 5.45, z: 0}
+  m_LocalPosition: {x: 13.48, y: 5.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 842754247}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &895463442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895463438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5febee60344344e488c27984c71b735a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WinText
-  WinnerText: {fileID: 0}
 --- !u!50 &895463443
 Rigidbody2D:
   serializedVersion: 5
@@ -1502,8 +1473,22 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &895463444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895463438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a13256f0665b634bb1068191b14fd68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WinningText
+  rb: {fileID: 895463443}
+  WinnerText: {fileID: 399912888}
 --- !u!1 &952091185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,7 +1501,7 @@ GameObject:
   - component: {fileID: 952091186}
   - component: {fileID: 952091189}
   - component: {fileID: 952091188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1682,7 +1667,7 @@ GameObject:
   - component: {fileID: 980314896}
   - component: {fileID: 980314899}
   - component: {fileID: 980314898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1896,7 +1881,7 @@ GameObject:
   - component: {fileID: 1027057971}
   - component: {fileID: 1027057974}
   - component: {fileID: 1027057973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2306,7 @@ GameObject:
   - component: {fileID: 1275178559}
   - component: {fileID: 1275178562}
   - component: {fileID: 1275178561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2487,7 +2472,7 @@ GameObject:
   - component: {fileID: 1304845248}
   - component: {fileID: 1304845251}
   - component: {fileID: 1304845250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2653,7 +2638,7 @@ GameObject:
   - component: {fileID: 1358011095}
   - component: {fileID: 1358011098}
   - component: {fileID: 1358011097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2819,7 +2804,7 @@ GameObject:
   - component: {fileID: 1658286008}
   - component: {fileID: 1658286011}
   - component: {fileID: 1658286010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2985,7 +2970,7 @@ GameObject:
   - component: {fileID: 1682229467}
   - component: {fileID: 1682229470}
   - component: {fileID: 1682229469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3331,7 +3316,7 @@ GameObject:
   - component: {fileID: 1773383457}
   - component: {fileID: 1773383460}
   - component: {fileID: 1773383459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3497,7 +3482,7 @@ GameObject:
   - component: {fileID: 1883786133}
   - component: {fileID: 1883786136}
   - component: {fileID: 1883786135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3660,7 +3645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1909925247}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3708,7 +3693,7 @@ GameObject:
   - component: {fileID: 2024695425}
   - component: {fileID: 2024695428}
   - component: {fileID: 2024695427}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3965,7 +3950,7 @@ GameObject:
   - component: {fileID: 2134059331}
   - component: {fileID: 2134059334}
   - component: {fileID: 2134059333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4129,6 +4114,5 @@ SceneRoots:
   - {fileID: 268361107}
   - {fileID: 1909925247}
   - {fileID: 895463441}
-  - {fileID: 842754247}
   - {fileID: 1086001526}
   - {fileID: 1009903844}
